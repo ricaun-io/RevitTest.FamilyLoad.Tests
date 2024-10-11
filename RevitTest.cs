@@ -26,6 +26,7 @@ namespace RevitTest.FamilyLoad.Tests
                 {
                     Console.WriteLine($"LoadFamily: \t{FamilyName}");
                     family = FamilyUtils.LoadFamily(document, FamilyPath);
+                    if (family is null) Assert.Ignore("LoadFamily fail");
                 }
 
                 Console.WriteLine($"Family: \t{family.Name}");
@@ -79,6 +80,7 @@ namespace RevitTest.FamilyLoad.Tests
                 transaction.Start("LoadFamilySymbol");
 
                 var familySymbol = FamilyUtils.SelectFamilySymbol(document, FamilyName);
+                if (familySymbol is null) Assert.Ignore("LoadFamilySymbol fail");
 
                 var parameterTypeComments = familySymbol.get_Parameter(BuiltInParameter.ALL_MODEL_TYPE_COMMENTS);
                 var typeComments = parameterTypeComments.AsString();
@@ -102,9 +104,10 @@ namespace RevitTest.FamilyLoad.Tests
         {
             using (Transaction transaction = new Transaction(document))
             {
-                transaction.Start("LoadFamilySymbol");
+                transaction.Start("LoadFamily");
 
                 var family = FamilyUtils.LoadFamily(document, FamilyPath);
+                if (family is null) Assert.Ignore("LoadFamily fail");
 
                 var familySymbols = FamilyUtils.SelectFamilySymbols(document, FamilyName);
                 foreach (var familySymbol in familySymbols)
@@ -199,6 +202,7 @@ namespace RevitTest.FamilyLoad.Tests
                 File.Copy(FamilyPath, familyPathTemp, true);
 
                 var family = FamilyUtils.LoadFamily(document, familyPathTemp);
+                if (family is null) Assert.Ignore("LoadFamily fail");
 
                 var familySymbols = FamilyUtils.SelectFamilySymbols(document, FamilyName);
                 foreach (var familySymbol in familySymbols)

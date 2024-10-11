@@ -32,16 +32,18 @@ namespace RevitTest.FamilyLoad.Tests
         public static Family LoadFamily(Document document, string familyPath, IFamilyLoadOptions familyLoadOptions = null)
         {
             familyLoadOptions ??= new OverwriteFamilyLoadOptions();
-            var loaded = document.LoadFamily(familyPath, familyLoadOptions, out Family family);
-            Console.WriteLine($" LoadFamily: {loaded}");
+            var familyLoaded = document.LoadFamily(familyPath, familyLoadOptions, out Family family);
+            if (!familyLoaded)
+                return null;
             return family;
         }
 
         public static FamilySymbol LoadFamilySymbol(Document document, string familyPath, string familySymbolName, IFamilyLoadOptions familyLoadOptions = null)
         {
             familyLoadOptions ??= new OverwriteFamilyLoadOptions();
-            var loaded = document.LoadFamilySymbol(familyPath, familySymbolName, familyLoadOptions, out FamilySymbol familySymbol);
-            Console.WriteLine($" LoadFamilySymbol: {loaded}");
+            var familySymbolLoaded = document.LoadFamilySymbol(familyPath, familySymbolName, familyLoadOptions, out FamilySymbol familySymbol);
+            if (!familySymbolLoaded) 
+                return null;
             return familySymbol;
         }
 
