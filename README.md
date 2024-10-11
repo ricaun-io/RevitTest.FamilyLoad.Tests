@@ -4,7 +4,9 @@
 [![Visual Studio 2022](https://img.shields.io/badge/Visual%20Studio-2022-blue)](../..)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-This project test how `LoadFamily` and `LoadFamilySymbol` works with `IFamilyLoadOptions` to overwrite the parameters.
+This project test how `LoadFamily` and `LoadFamilySymbol` works with `IFamilyLoadOptions` to overwrite the parameters using the [ricaun.RevitTest](https://ricaun.com/RevitTest) Framework.
+
+## Tests
 
 Looks like the `IFamilyLoadOptions` is not working as expected when the family is loaded for the second time.
 

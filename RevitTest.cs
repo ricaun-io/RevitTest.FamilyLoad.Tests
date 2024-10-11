@@ -10,7 +10,7 @@ namespace RevitTest.FamilyLoad.Tests
 {
     public class RevitTests : Utils.OneTimeOpenDocumentTest
     {
-        protected override string FileName => @"Family\Project2019.rvt";
+        //protected override string FileName => @"Family\Project2019.rvt";
         string FamilyPath => $@"Family\Family{application.VersionNumber}.rfa";
         string FamilyName => Path.GetFileNameWithoutExtension(FamilyPath);
 
