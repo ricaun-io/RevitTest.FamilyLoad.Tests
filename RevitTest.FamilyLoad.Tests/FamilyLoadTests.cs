@@ -102,6 +102,8 @@ namespace RevitTest.FamilyLoad.Tests
         [Order(6)]
         public void RevitTests_ReLoadFamily()
         {
+            ForceToReloadFamily();
+
             using (Transaction transaction = new Transaction(document))
             {
                 transaction.Start("LoadFamily");
@@ -120,6 +122,25 @@ namespace RevitTest.FamilyLoad.Tests
 
                 transaction.Commit();
             }
+        }
+
+        public void ForceToReloadFamily()
+        {
+            Console.WriteLine(">> ForceToReloadFamily");
+
+            FamilyUtils.EditLoadFamily(document, FamilyUtils.SelectFamily(document, FamilyName), (familyDocument) =>
+            {
+                using (Transaction transaction = new Transaction(familyDocument))
+                {
+                    transaction.Start("Change Family");
+
+                    var name = familyDocument.FamilyManager.CurrentType.Name;
+                    familyDocument.FamilyManager.RenameCurrentType(name + $" {DateTime.UtcNow.Ticks}");
+                    familyDocument.FamilyManager.RenameCurrentType(name);
+
+                    transaction.Commit();
+                }
+            });
         }
 
         [Test]
@@ -193,6 +214,8 @@ namespace RevitTest.FamilyLoad.Tests
         [Order(6)]
         public void RevitTests_ReLoadFamily_DifferentPath()
         {
+            ForceToReloadFamily();
+
             using (Transaction transaction = new Transaction(document))
             {
                 transaction.Start("ReLoadFamily_DifferentPath");
