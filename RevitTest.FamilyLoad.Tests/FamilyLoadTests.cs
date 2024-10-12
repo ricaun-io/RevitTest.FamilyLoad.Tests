@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace RevitTest.FamilyLoad.Tests
 {
-    public class RevitTests : Utils.OneTimeOpenDocumentTest
+    public class FamilyLoadTests : Utils.OneTimeOpenDocumentTest
     {
         //protected override string FileName => @"Family\Project2019.rvt";
         string FamilyPath => $@"Family\Family{application.VersionNumber}.rfa";
